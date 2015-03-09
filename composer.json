@@ -22,7 +22,8 @@
         "jms/serializer-bundle": "0.13.*",
         "friendsofsymfony/rest-bundle": "~1.5",
         "nelmio/api-doc-bundle": "~2.8",
-        "laupifrpar/pusher-bundle": "~1.2"
+        "laupifrpar/pusher-bundle": "~1.2",
+        "phpspec/phpspec": "~2.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
