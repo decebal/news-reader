@@ -1,0 +1,26 @@
+ApiBundle\Entity\Article:
+    type: entity
+    table: null
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: 255
+        description:
+            type: text
+        link:
+            type: string
+            length: 255
+        imagePath:
+            type: string
+            length: 255
+            column: image_path
+        addedOn:
+            type: datetime
+            column: added_on
+    lifecycleCallbacks: {  }
