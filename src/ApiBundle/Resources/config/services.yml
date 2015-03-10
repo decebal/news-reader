@@ -1,3 +1,5 @@
 services:
   feed_reader:
-    class: ApiBundle\FeedReader
+    class: ApiBundle\Services\FeedManager
+    arguments: [ @doctrine.orm.entity_manager ]
+

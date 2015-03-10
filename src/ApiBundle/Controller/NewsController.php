@@ -16,14 +16,9 @@ class NewsController extends Controller
 
     public function indexAction()
     {
-        //read xml
-//        $feed = file_get_contents('http://feeds.bbci.co.uk/news/england/rss.xml');
-//        $feed = str_replace('<media:', '<', $feed);
-//
-//        $rss = simplexml_load_string($feed);
-//
+        $feedManager = $this->get('feed_reader');
+        $viewParams['articles'] = $feedManager->getArticles();
 
-
-        return $this->render('default/index.html.twig');
+        return $this->render('default/index.html.twig', $viewParams);
     }
 }
