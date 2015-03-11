@@ -1,5 +1,12 @@
-services:
-  feed_reader:
-    class: ApiBundle\Services\FeedManager
-    arguments: [ @doctrine.orm.entity_manager ]
+parameters:
+  apibundle.feed_sources:
+    telegraph: "http://www.telegraph.co.uk/sport/football/competitions/premier-league/rss"
 
+services:
+  apibundle.services.feed_reader:
+    class: ApiBundle\Services\FeedManager
+    arguments: [ @doctrine.orm.entity_manager, @apibundle.services.xmlparser ]
+
+  apibundle.services.xmlparser:
+    class: ApiBundle\Services\XmlParser
+    arguments: [ "%apibundle.feed_sources%" ]

@@ -16,7 +16,7 @@ class NewsController extends Controller
 
     public function indexAction()
     {
-        $feedManager = $this->get('feed_reader');
+        $feedManager = $this->get('apibundle.services.feed_reader');
         $viewParams['articles'] = $feedManager->getArticles();
 
         return $this->render('default/index.html.twig', $viewParams);
