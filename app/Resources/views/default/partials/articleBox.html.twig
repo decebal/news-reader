@@ -1,0 +1,10 @@
+<div class="col-lg-8">
+    <div class="hero-unit">
+        <h2>{% block headline %}{{ article.title }}{% endblock %}</h2>
+        <div class="article-with-image">
+            <img src="{{ article.imagePath }}" class="inline-image" />
+            <div>{{ article.description|raw }}</div>
+            <a href="{{ article.link }}">View original article</a>
+        </div>
+    </div>
+</div>

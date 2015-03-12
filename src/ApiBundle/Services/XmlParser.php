@@ -6,6 +6,8 @@
  * Time: 08:06
  */
 
+use Psr\Log\LoggerInterface;
+
 class XmlParser
 {
     /**
@@ -19,6 +21,9 @@ class XmlParser
         'publishedDate'
     );
 
+    /**
+     * @var bool|array
+     */
     private $cache = false;
 
     /**
@@ -27,18 +32,29 @@ class XmlParser
     private $config;
 
     /**
-     * @param array $config
+     * @var string FeedSource
      */
-    function __construct(array $config = array())
+    private $sourceName = '';
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * @param array $config
+     * @param LoggerInterface $logger
+     */
+    function __construct(array $config = array(), LoggerInterface $logger)
     {
         $this->config = $config;
+        $this->logger = $logger;
     }
 
     /**
      * @param int $limit
      * @return array|bool
      */
-    public function readFeed($limit = 1)
+    public function readFeed($limit)
     {
         if ($this->cache !== false) {
             return $this->cache;
@@ -55,7 +71,16 @@ class XmlParser
      */
     protected function loadArticlesFromFeed($limit = 1)
     {
-//        $rss = simplexml_load_file();
+        libxml_use_internal_errors(true);
+        $rss = simplexml_load_file($this->config[$this->sourceName]);
+        if ($rss === false) {
+            foreach(libxml_get_errors() as $error) {
+                $this->logger->error($error->message);
+            }
+
+            return array();
+        }
+
         $count = 0;
         $articles = array();
 
@@ -75,6 +100,10 @@ class XmlParser
         return $articles;
     }
 
+    /**
+     * @param $xml
+     * @return array
+     */
     protected function loadFields($xml)
     {
         $element = array();
@@ -85,26 +114,54 @@ class XmlParser
         return $element;
     }
 
+    /**
+     * @param string $sourceName
+     */
+    public function setSourceName($sourceName)
+    {
+        $this->sourceName = $sourceName;
+    }
+
+    /**
+     * @param $xml
+     * @return string
+     */
     protected function getTitle($xml)
     {
         return (string) $xml->title;
     }
 
+    /**
+     * @param $xml
+     * @return string
+     */
     protected function getLink($xml)
     {
         return (string) $xml->guid;
     }
 
+    /**
+     * @param $xml
+     * @return string
+     */
     protected function getPublishedDate($xml)
     {
         return (string) $xml->pubDate;
     }
 
+    /**
+     * @param $xml
+     * @return string
+     */
     protected function getDescription($xml)
     {
         return (string) $xml->description;
     }
 
+    /**
+     * @param $xml
+     * @return string
+     */
     protected function getImage($xml)
     {
         return (string) $xml->enclosure['url'];

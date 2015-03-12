@@ -16,6 +16,7 @@ ApiBundle\Entity\Article:
         link:
             type: string
             length: 255
+            unique: true
         imagePath:
             type: string
             length: 255

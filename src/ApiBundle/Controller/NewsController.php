@@ -10,15 +10,21 @@ namespace ApiBundle\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class NewsController extends Controller
 {
 
     public function indexAction()
     {
-        $feedManager = $this->get('apibundle.services.feed_reader');
-        $viewParams['articles'] = $feedManager->getArticles();
+        return $this->render('default/index.html.twig');
+    }
 
-        return $this->render('default/index.html.twig', $viewParams);
+    public function feedReaderAction(Request $request)
+    {
+        $feedManager = $this->get('apibundle.services.feed_reader');
+        $viewParams['articles'] = $feedManager->getArticles($request->get('feed'));
+
+        return $this->render('default/feed.html.twig', $viewParams);
     }
 }

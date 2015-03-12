@@ -32,22 +32,21 @@ class FeedManager
         $this->entityManager = $entityManager;
         $this->articleEntity = $this->entityManager->getRepository('ApiBundle:Article');
         $this->xmlReader = $xmlReader;
-        var_dump($this->xmlReader);
-        die();
     }
 
     public function loadArticles()
     {
         $articles = $this->articleEntity->findBy(array(), $this->orderBy, $this->limit);
-        if (count($articles) < $this->limit) {
-            $articles = array_merge($this->loadArticlesFromFeed(), $articles);
-        }
 
         return $articles;
     }
 
     protected function saveArticles($articles)
     {
+        if (empty($articles)) {
+            return false;
+        }
+
         foreach ($articles as $article) {
             $newArticle = new Article();
             $newArticle->setTitle($article['title']);
@@ -60,18 +59,38 @@ class FeedManager
         $this->entityManager->flush();
     }
 
-    protected function sortArticles()
-    {
-
-    }
-
+    /**
+     * @return bool
+     */
     public function checkNewArticle()
     {
+        $lastArticles = $this->xmlReader->readFeed($this->limit);
+        if (empty($lastArticles)) {
+            return false;
+        }
+        $lastArticle = array_shift($lastArticles);
 
+        $article = $this->articleEntity->findOneBy(array('link' => $lastArticle['link']));
+
+        if (is_null($article)) {
+            return true;
+        }
+
+        return false;
     }
 
-    public function getArticles()
+    /**
+     * @param string $source
+     *
+     * @return \ApiBundle\Entity\Article[]|array|bool
+     */
+    public function getArticles($source = 'telegraph')
     {
+        $this->xmlReader->setSourceName($source);
+        if ($this->checkNewArticle()) {
+            $articles = $this->xmlReader->readFeed($this->limit);
+            $this->saveArticles($articles);
+        }
         $articles = $this->loadArticles();
 
         return $articles;

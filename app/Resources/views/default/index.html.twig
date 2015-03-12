@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    Homepage.
+{% block content %}
+    Welcome to my news Feed.
+    Please see <a href="{{ path('_list_news_feed', { feed: 'telegraph'}) }}">Telegraph News</a>
 {% endblock %}

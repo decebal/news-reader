@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    Take a look at the latest articles on Telegraph:
+
+    {% for article in articles %}
+        {% include ":default/partials:articleBox.html.twig" with { article: article} %}
+    {% endfor %}
+{% endblock %}

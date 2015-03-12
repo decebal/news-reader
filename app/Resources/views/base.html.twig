@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
+{% extends "MopaBootstrapBundle::base.html.twig" %}
+{% block title %}News Feed Api{% endblock title %}
+{% block headline %}News Feed{% endblock headline %}
+{% block footer %}
+    <p>&copy; <a href="http://www.github.com/decebal" target="_blank">Decebal</a> 2015</p>
+{% endblock footer %}

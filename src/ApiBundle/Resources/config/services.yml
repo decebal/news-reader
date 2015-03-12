@@ -9,4 +9,4 @@ services:
 
   apibundle.services.xmlparser:
     class: ApiBundle\Services\XmlParser
-    arguments: [ "%apibundle.feed_sources%" ]
+    arguments: [ "%apibundle.feed_sources%", @monolog.logger ]

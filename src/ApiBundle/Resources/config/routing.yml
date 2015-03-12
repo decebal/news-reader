@@ -1,3 +1,6 @@
 _list_news:
     path:      /
     defaults:  { _controller: ApiBundle:News:index }
+_list_news_feed:
+    path:      /{feed}
+    defaults:  { _controller: ApiBundle:News:feedReader, feed: feed }
