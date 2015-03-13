@@ -24,7 +24,8 @@
         "nelmio/api-doc-bundle": "~2.8",
         "laupifrpar/pusher-bundle": "~1.2",
         "phpspec/phpspec": "~2.1",
-        "mopa/bootstrap-bundle": "dev-master"
+        "mopa/bootstrap-bundle": "dev-master",
+        "twbs/bootstrap": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
@@ -40,6 +41,7 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+            "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap",
             "php app/console doctrine:database:create",
             "php app/console doctrine:schema:update --force"
         ],
@@ -49,7 +51,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
+            "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
         ]
     },
     "config": {
