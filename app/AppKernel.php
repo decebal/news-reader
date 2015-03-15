@@ -19,7 +19,6 @@ class AppKernel extends Kernel
 
             //api bundles
             new ApiBundle\ApiBundle(),
-            new Mopa\Bundle\BootstrapBundle\MopaBootstrapBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
