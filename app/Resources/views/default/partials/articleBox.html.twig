@@ -1,12 +1,8 @@
-<div class="col-lg-8">
-    <div class="well">
-        <div class="col-sm-6">
-            <img src="{{ article.imagePath }}" class="img-responsive">
-        </div>
-        <div class="col-sm-6">
-            <h2>{% block headline %}{{ article.title }}{% endblock %}</h2>
-            <div>{{ article.description|raw }}</div>
-            <a href="{{ article.link }}">View original article</a>
-        </div>
-    </div>
-</div>
+<figure class="uk-panel uk-width-medium-1-4">
+    <img src="{{ article.imagePath }}" class="uk-border-rounded uk-align-medium-left uk-thumbnail">
+    <figcaption class="uk-thumbnail-caption">
+        <div class="uk-panel-title">{{ article.title }}</div>
+        <div class="uk-panel-text">{{ article.description|striptags('<code><p>') }}</div>
+        <a class="uk-button-link" href="{{ article.link }}">View original article</a>
+    </figcaption>
+</figure>
