@@ -17,8 +17,7 @@ Run from browser
 ## Testing
 
 ``` bash
-$ phpunit
-$ phpspec
+$ bin/phpspec
 ```
 
 ## Credits
