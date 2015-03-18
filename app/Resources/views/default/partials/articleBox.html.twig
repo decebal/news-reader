@@ -1,10 +1,8 @@
-<div class="col-lg-8">
-    <div class="hero-unit">
-        <h2>{% block headline %}{{ article.title }}{% endblock %}</h2>
-        <div class="article-with-image">
-            <img src="{{ article.imagePath }}" class="inline-image" />
-            <div>{{ article.description|raw }}</div>
-            <a href="{{ article.link }}">View original article</a>
-        </div>
-    </div>
-</div>
+<figure class="uk-panel uk-width-medium-1-4">
+    <img src="{{ article.imagePath }}" class="uk-border-rounded uk-align-medium-left uk-thumbnail">
+    <figcaption class="uk-thumbnail-caption">
+        <div class="uk-panel-title">{{ article.title }}</div>
+        <div class="uk-panel-text">{{ article.description|striptags('<code><p>') }}</div>
+        <a class="uk-button-link" href="{{ article.link }}">View original article</a>
+    </figcaption>
+</figure>

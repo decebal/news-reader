@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class FeedManager
 {
     protected $limit = 20;
-    protected $orderBy = array('title' => "asc");
+    protected $orderBy = array('addedOn' => 'desc', 'title' => "asc");
 
     /**
      * @var EntityManagerInterface
@@ -48,6 +48,14 @@ class FeedManager
         }
 
         foreach ($articles as $article) {
+            $exists = $this->articleEntity->findOneBy(
+                array('link' =>$article['link'])
+            );
+
+            if ($exists) {
+                continue;
+            }
+
             $newArticle = new Article();
             $newArticle->setTitle($article['title']);
             $newArticle->setDescription($article['description']);
