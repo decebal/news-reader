@@ -1,8 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block content %}
-    Take a look at the latest articles on Telegraph:
-
+{% block headline %}Take a look at the latest articles on Telegraph:{% endblock headline %}
+{% block content_row %}
     {% for article in articles %}
         {% include ":default/partials:articleBox.html.twig" with { article: article} %}
     {% endfor %}
